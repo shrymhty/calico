@@ -1,0 +1,56 @@
+.reviews-carousel {
+  text-align: center;
+  background-color: #fefefe;
+  padding: 2rem 2rem;
+  font-family: 'Quicksand', sans-serif;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+
+.reviews-carousel h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+}
+
+.review-card {
+  flex: 0 0 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.review-text {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: #222;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem auto;
+}

@@ -1,0 +1,102 @@
+.welcome-wrapper {
+    background: #f7f5f1;
+    box-sizing: border-box;
+    margin: 3em auto;
+}
+.welcome {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 3rem;
+  gap: 80px;
+  align-items: center;
+
+}
+
+.text-container {
+  max-width: 50%;
+  flex: 1;
+  font-family: "Quicksand", sans-serif;
+  color: #333;
+}
+
+.text-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.text-container p {
+  line-height: 2rem;
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.text-container h1 span {
+  color: #82b3bc;
+}
+
+button {
+  padding: 0.8vw 2vw;
+  background-color: #b7868d; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1vw;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 400;
+  color: white;
+}
+
+button:hover {
+  background-color: #d5b1b9;
+  color: #566878;
+}
+
+.image-container {
+  display: flex;
+  gap: 0px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.styled-img {
+  width: 240px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.tilt-left {
+  transform: rotate(-3deg);
+}
+
+.tilt-right {
+  transform: rotate(5deg) translateY(60px);
+}
+
+.tilt-left:hover {
+  transform: rotate(-3deg) scale(1.05);
+}
+
+.tilt-right:hover {
+  transform: rotate(5deg) translateY(60px) scale(1.05);
+}
+
+.delicate {
+  color: #82b3bc;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-style: wavy;
+  font-weight: 500;
+}
+
+.personal {
+  color: #82b3bc;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  font-weight: 500;
+}

@@ -5,11 +5,13 @@ const Header = () => {
   return (
     <div  className='header'>
         <div className="header-content">
-            <h2>STUFF STUFF</h2>
+          <div className="text">
+            <h2>Crafted Crochet for Every Corner of Life</h2>
             <p>
-                more stuff
+                Discover beautifully crafted crochet pieces that feel like home, made with care and creativity in every stitch.
             </p>
-            <button>Shop Now</button>
+          </div>
+          <button>Shop the Collection</button>
         </div>
     </div>
   )

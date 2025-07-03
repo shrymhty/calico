@@ -1,0 +1,59 @@
+.explore-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: auto 40px;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  color: #333;
+}
+
+.explore-categories h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.carousel-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: auto 2em;
+  width: 80vw;
+}
+
+.explore-list {
+  display: flex;
+  gap: 6em;
+  padding: 10px;
+}
+
+.explore-list div {
+  min-width: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.explore-list img {
+  width: 21.5em;
+  height: 13.5em;
+  object-fit: cover;
+  border-radius: 12px;
+  border: solid 5px #f7f5f1;
+  padding: 4px;
+}
+
+.explore-list img:hover {
+    border: solid 5px #e8e4dc;
+    scale: 1.05;
+    transition: border 0.3s, scale 0.3s;
+    cursor: pointer;
+}
+
+.explore-list p {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
