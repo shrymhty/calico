@@ -8,7 +8,7 @@
   color: #333;
 }
 
-.filters {
+.filter-div {
   min-width: 250px;
   padding: 1.5rem;
   background-color: #f9f9f9;
@@ -18,33 +18,29 @@
   
 }
 
-/* Filter title */
-.filters h3 {
+.filter-div h3 {
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   font-weight: 600;
   text-align: center;
 }
 
-/* Individual filter section */
 .filter-section {
   margin-bottom: 2rem;
 }
 
-.filter-section h4 {
+* .filter-section h4 {
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
   font-weight: 500;
   color: #555;
 }
 
-/* Price range input */
 .price-range {
   width: 100%;
   margin-bottom: 0.5rem;
 }
 
-/* Checkbox list */
 .filter-section label {
   display: flex;
   align-items: center;
@@ -55,11 +51,10 @@
 
 .filter-section input[type="checkbox"] {
   margin-right: 0.5rem;
-  accent-color: #82b3bc;
+  accent-color: #b7868d;
 }
 
-.filters button {
-  background-color: #82b3bc;
+.filter-div button {
   color: white;
   border: none;
   padding: 0.6rem 1rem;
@@ -76,9 +71,9 @@
   color: #49749a;
 }
 
-.products {
+.products-div {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem; 
-  justify-content: space-evenly;
-}
+  gap: 3.5rem; 
+  justify-content: flex-start;
+} 

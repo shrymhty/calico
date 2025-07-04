@@ -1,10 +1,16 @@
 import React, { useRef } from 'react'
 import './Category.css'
 import { category_list } from '../../assets/assets'
+import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
 
     const scrollRef = useRef();
+    const navigate = useNavigate();
+
+    const handleClick = (catName) => {
+        navigate(`/shop/${catName}`);
+    }
  
   return (
     <div className="explore-categories" id='explore-categories'>
@@ -14,7 +20,7 @@ const Category = () => {
                 <div className="explore-list">
                     {category_list.map((category, index) => {
                         return (
-                            <div>
+                            <div onClick={() => handleClick(category.id)}>
                                 <img src={category.image} alt="" className={category.name} />
                                 <p>{category.name}</p>
                             </div>   
