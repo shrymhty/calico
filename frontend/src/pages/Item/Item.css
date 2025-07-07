@@ -1,0 +1,133 @@
+.item-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  gap: 3rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.item-image {
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item-info {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.item-info h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.item-info p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.item-info .price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e7d32; /* Green */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quantity {
+  font-size: 1.3rem;
+  font-weight: bold;
+  width: 40px;
+  text-align: center;
+}
+
+.add-btn,
+.remove-btn {
+  font-size: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-btn {
+  background-color: #b7868d;
+  color: white;
+}
+
+.remove-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.add-btn:hover {
+  background-color: #d5b1b9;
+  color: #566878;
+}
+
+.remove-btn:hover {
+  background-color: #c7c7c7;
+}
+
+/* Optional: Add Buy Now and Wishlist styles */
+.buy-now-btn {
+  background-color: #1a1a1a;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.buy-now-btn:hover {
+  background-color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .item-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .item-info h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .item-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .action-button {
+    justify-content: center;
+  }
+}

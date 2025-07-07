@@ -1,11 +1,13 @@
 import React from 'react'
 import './Shop.css'
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { category_list, product_list } from '../../assets/assets';
 import ProductCard from '../../components/ProductCard/ProductCard'
 
 const Shop = () => {
 
+    const {category} = useParams();
     const [price, setPrice] = useState(5000);
     const [selectedCat, setSelectedCat] = useState([]);
 
@@ -24,6 +26,14 @@ const Shop = () => {
     useEffect(() => {
         console.log("Selected categories updated:", selectedCat);
     }, [selectedCat]);
+
+    useEffect(() => {
+        if (category && category_list.some(cat => cat.id === category)) {
+            setSelectedCat([category]);
+        } else {
+            setSelectedCat([]); // if not a valid category, show all
+        }
+    }, [category]);
 
     const handleReset = () => {
         setPrice(5000);
