@@ -1,7 +1,7 @@
 import React from 'react'
 import './Shop.css'
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { category_list, product_list } from '../../assets/assets';
 import ProductCard from '../../components/ProductCard/ProductCard'
 

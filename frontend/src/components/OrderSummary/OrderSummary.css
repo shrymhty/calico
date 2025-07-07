@@ -1,0 +1,22 @@
+.order-summary {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    padding: 2rem;
+    height: fit-content;
+}
+
+.order-summary h2 {
+    margin-bottom: 10px;
+    border-bottom: 1px #333 solid;
+}
+
+.product-total, .shipping, .total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.checkout-btn {
+    width: 100%;
+}

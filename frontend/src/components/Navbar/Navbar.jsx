@@ -3,9 +3,12 @@ import "./Navbar.css"
 import { assets } from '../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="navbar">
       <div className="navbar-left">
@@ -21,7 +24,7 @@ const Navbar = () => {
         <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' />
       </div>
       <div className="navbar-right">
-        <FontAwesomeIcon icon={faCartShopping} className='cart-icon' />
+        <FontAwesomeIcon icon={faCartShopping} className='cart-icon' onClick={() => navigate("/cart")}/>
         <FontAwesomeIcon icon={faUser} className='user-icon' />
       </div>
     </div>

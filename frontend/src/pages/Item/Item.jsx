@@ -33,7 +33,7 @@ const Item = () => {
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <p>Category: {categoryName()}</p>
-            <p>Price: ₹{product.price}</p>
+            <p className='price'>Price: <span>₹{product.price}</span></p>
             <div className="action-button">
               <button className="remove-btn" onClick={() => removeFromCart(product.id)}>-</button>
               <div className="quantity">{quantity}</div>

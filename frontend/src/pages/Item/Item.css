@@ -43,11 +43,15 @@
 }
 
 .item-info .price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #2e7d32; /* Green */
+  font-size: 1.5rem;
   border-bottom: 1px solid #ccc;
+  color: #566878;
   padding-bottom: 0.5rem;
+}
+
+.item-info .price span {
+  color: #49749a;
+  font-weight: 600;
 }
 
 .action-button {
@@ -74,23 +78,14 @@
   transition: background-color 0.2s ease;
 }
 
-.add-btn {
+.add-btn, .remove-btn {
   background-color: #b7868d;
   color: white;
 }
 
-.remove-btn {
-  background-color: #e0e0e0;
-  color: #333;
-}
-
-.add-btn:hover {
+.add-btn:hover, .remove-btn:hover {
   background-color: #d5b1b9;
   color: #566878;
-}
-
-.remove-btn:hover {
-  background-color: #c7c7c7;
 }
 
 /* Optional: Add Buy Now and Wishlist styles */

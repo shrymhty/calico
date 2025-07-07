@@ -38,6 +38,10 @@ const StoreContextProvider = (props) => {
         removeFromCart
     };
 
+    // get total here
+
+    // get all items list
+
     return (
         <StoreContext.Provider value={contextValue}>
             {props.children}
