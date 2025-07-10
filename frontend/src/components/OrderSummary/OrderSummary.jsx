@@ -1,23 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './OrderSummary.css'
+import { StoreContext } from '../../context/StoreContext'
+import { useNavigate } from 'react-router-dom';
 
 const OrderSummary = () => {
+
+    const {getCartTotal} = useContext(StoreContext);
+    const navigate = useNavigate();
+    
   return (
     <div className='order-summary'>
         <h2>Order Summary</h2>
         <div className="product-total">
             <p>Subtotal</p>
-            <p>12</p>
+            <p>₹ {getCartTotal()}</p>
         </div>
         <div className="shipping">
             <p>Shipping</p>
-            <p>2</p>
+            <p>₹ 250</p>
         </div>
         <div className="total">
             <p>Total</p>
-            <p>12003</p>
+            <p>₹ {getCartTotal() + 250}</p>
         </div>
-        <button className="checkout-btn">
+        <button className="checkout-btn" onClick={() => navigate('/order')}>
             Checkout
         </button>
     </div>

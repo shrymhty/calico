@@ -79,3 +79,34 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.navbar-cart {
+    position: relative;
+}
+
+.navbar-cart .dot {
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: #b7868d;
+    border-radius: 50%;
+    top: -4px;
+    right: -4px;
+}
+
+.sign-in-btn {
+    border-radius: 24px;
+    border: 2px solid #49749a;
+    background: #f7f5f1;
+    color: #49749a;
+    font-weight: 500;
+    padding: 8px 20px;
+    
+}
+
+.sign-in-btn:hover {
+    background: #82b3bc;
+    border: 2px solid #82b3bc;
+    color: white;
+    box-sizing: border-box;
+}

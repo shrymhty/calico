@@ -1,9 +1,31 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { product_list } from "../assets/assets";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../components/utils/firebase";
 
 export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
+
     const [cartItems, setCartItems] = useState({});
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+            } else {
+                setUser(null);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const logout = () => {
+        signOut(auth).then(() => {
+            setUser(null);
+        });
+    }
 
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
@@ -30,12 +52,35 @@ const StoreContextProvider = (props) => {
             }
             return updated;
         });
-    } 
+    }
+    
+    const deleteFromCart = (itemId) => {
+        setCartItems(prev => {
+            const updatedCart = { ...prev };
+            delete updatedCart[itemId];
+            return updatedCart;
+        });
+    }
+
+    const getCartTotal = () => {
+        let totalAmount = 0;
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfo = product_list.find((product) => product.id === parseInt(item));
+                totalAmount += itemInfo.price * cartItems[item]
+            }
+        }
+        return totalAmount;
+    }
 
     const contextValue = {
         cartItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        deleteFromCart,
+        getCartTotal,
+        user,
+        logout
     };
 
     // get total here

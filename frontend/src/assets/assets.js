@@ -33,6 +33,8 @@ import accessory_3 from "./accessory_3.jpg"
 import accessory_4 from "./accessory_4.jpg"
 import accessory_5 from "./accessory_5.jpg"
 
+import google_icon from './google_icon.svg'
+
 export const assets = {
     logo,
     header,
@@ -40,7 +42,8 @@ export const assets = {
     hero_key,
     insta,
     linkedin,
-    clothing_1
+    clothing_1,
+    google_icon
 }
 
 export const category_list = [

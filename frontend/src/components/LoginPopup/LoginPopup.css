@@ -1,0 +1,107 @@
+.login-popup {
+    position: absolute;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Quicksand", sans-serif;
+    color: #444;
+}
+
+.login-popup-container {
+    background: white;
+    width: fit-content;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    animation: fadein 0.5s;
+    width: 28vw;
+}
+
+.login-popup-title {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.login-popup-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #444;
+}
+
+.close-login {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.close-login:hover {
+    color: red;
+}
+
+.login-popup-intro-text {
+    text-align: center;
+}
+
+.login-popup-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.forgot-pass {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.forgot-pass:hover {
+    font-weight: 500;
+}
+
+.sign-up-link {
+    color: #b7868d;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  color: #888;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.google-btn {
+    display: flex;
+    gap: 1rem;
+    background-color: white;
+    border: 2px solid #b7868d;
+    color: #444;
+    border-radius: 15px;
+}
+
+.google-btn img {
+    width: 20px;
+}

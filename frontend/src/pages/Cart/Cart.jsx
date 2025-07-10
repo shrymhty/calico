@@ -5,7 +5,7 @@ import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import "./Cart.css";
 
 const Cart = () => {
-  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+  const { cartItems, removeFromCart } = useContext(StoreContext);
 
   const cartItemDetails = Object.entries(cartItems).map(([id, quantity]) => {
     const product = product_list.find((item) => item.id === parseInt(id));
@@ -42,8 +42,7 @@ const Cart = () => {
                 <p>{item.description}</p>
                 <p>₹{item.price}</p>
                 <p>{item.quantity}</p>
-                <p>₹{item.price * item.quantity}</p>
-                <button className="delete-btn">X</button>
+                <button className="delete-btn" onClick={() => removeFromCart(item.id)}>X</button>
               </div>
             ))}
           </div>
