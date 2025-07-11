@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { product_list } from "../assets/assets";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../components/utils/firebase";
+import { auth, db } from "../components/utils/firebase";
+import { getDoc, doc } from "firebase/firestore";
 
 export const StoreContext = createContext();
 
@@ -9,13 +10,19 @@ const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
     const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
+                const userDoc = await getDoc(doc(db, "Users", currentUser.uid));
+                if (userDoc.exists()) {
+                    setUserData(userDoc.data());
+                }
             } else {
                 setUser(null);
+                setUserData(null);
             }
         });
         return () => unsubscribe();
@@ -80,7 +87,8 @@ const StoreContextProvider = (props) => {
         deleteFromCart,
         getCartTotal,
         user,
-        logout
+        logout,
+        userData
     };
 
     // get total here

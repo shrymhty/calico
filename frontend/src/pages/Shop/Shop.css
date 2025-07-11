@@ -9,6 +9,7 @@
 }
 
 .filter-div {
+  max-width: 250px;
   min-width: 250px;
   padding: 1.5rem;
   background-color: #f9f9f9;
@@ -77,3 +78,42 @@
   gap: 3.5rem; 
   justify-content: flex-start;
 } 
+
+.price-range {
+  padding: 12px 0px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+/* Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #b7868d;
+}
+
+/* Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #f7f5f1;
+  border: 2px solid #b7868d;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  height: 16px;
+  width: 16px;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+  background: #b7868d;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #f7f5f1;
+  border: 2px solid #b7868d;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  height: 16px;
+  width: 16px;
+}

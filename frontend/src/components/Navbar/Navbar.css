@@ -110,3 +110,56 @@
     color: white;
     box-sizing: border-box;
 }
+
+.navbar-profile {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Hidden by default */
+.profile-drop {
+    position: absolute;
+    top: 100%; /* below the profile */
+    right: 0;
+    display: none;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 10;
+    min-width: 200px; /* Ensures enough width for content */
+}
+
+/* Show on hover */
+.navbar-profile:hover .profile-drop {
+    display: block;
+}
+
+/* Optional styling inside dropdown */
+.profile-drop p {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.profile-drop ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-drop li {
+    padding: 0.5rem 0;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    color: #444;
+}
+
+.profile-drop li:hover {
+    color: #49749a;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: underline;
+}

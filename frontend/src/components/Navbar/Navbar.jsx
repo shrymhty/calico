@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import "./Navbar.css"
 import { assets } from '../../assets/assets'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCartShopping, faUser, faBagShopping, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import {Link, useNavigate} from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
 
 const Navbar = ({setShowLogin}) => {
 
   const navigate = useNavigate();
-  const {getCartTotal, user, logout} = useContext(StoreContext);
+  const {getCartTotal, userData, user, logout} = useContext(StoreContext);
 
   return (
     <div className="navbar">
@@ -34,6 +34,13 @@ const Navbar = ({setShowLogin}) => {
             ? <button onClick={() => setShowLogin(true)} className='sign-in-btn'>Sign in</button>
             : <div className='navbar-profile'>
                 <FontAwesomeIcon icon={faUser} className='user-icon' />
+                <div className="profile-drop">
+                  <p>{userData?.name || "User"}</p>
+                  <ul>
+                    <li onClick={() => navigate("/myorders")}> <FontAwesomeIcon icon={faBagShopping} />My Orders</li>
+                    <li onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /> Logout</li>
+                  </ul>
+                </div>
             </div>
           }
       </div>

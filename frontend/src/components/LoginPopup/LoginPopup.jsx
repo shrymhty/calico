@@ -52,9 +52,6 @@ const LoginPopup = ({setShowLogin}) => {
                 })
             }
             console.log("User is registered successfully");
-            toast.success("Account Created!", {
-                position: 'top-right'
-            });
             setShowLogin(false);
             
         } catch (error) {
@@ -71,9 +68,6 @@ const LoginPopup = ({setShowLogin}) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log("User logged in successfully");
-            toast.success("Login Successful!", {
-                position: 'top-right'
-            });
             setShowLogin(false); // Close popup after login
         } catch (error) {
             console.log(error.message);
