@@ -3,8 +3,8 @@ import './LoginPopup.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { assets } from '../../assets/assets';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../utils/firebase';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, db, provider } from '../utils/firebase';
 import {setDoc, doc} from "firebase/firestore"
 import { toast } from 'react-toastify';
 
@@ -77,6 +77,22 @@ const LoginPopup = ({setShowLogin}) => {
         }
     };
 
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth, provider).then(async (result) => {
+            const user = result.user;
+
+            if (user) {
+                await setDoc(doc(db, "Users", user.uid), {
+                    email: user.email,
+                    name: user.displayName, // Note: Use displayName, not name
+                });
+                setShowLogin(false);
+            }
+        }).catch((error) => {
+            console.error("Google sign-in error:", error);
+        });
+    };
+
   return (
     <div className="login-popup">
         <form className='login-popup-container' onSubmit={currState === 'Login' ? handleLogin : handleRegister}>
@@ -110,7 +126,7 @@ const LoginPopup = ({setShowLogin}) => {
                     <p>OR</p>
                     <div className="line"></div>
                 </div>
-                <button className='google-btn'>
+                <button className='google-btn' onClick={() => handleGoogleLogin()}>
                     <img src={assets.google_icon} alt="" />
                     Continue With Google    
                 </button>
