@@ -1,0 +1,10 @@
+.admin-div h1 {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    color: #2c466a;
+}
+
+.app-content {
+    display: flex;
+}
