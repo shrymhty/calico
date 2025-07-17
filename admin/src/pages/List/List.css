@@ -1,0 +1,61 @@
+.list-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.list-table {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 35rem;
+}
+
+.list-table-format.title {
+    display: grid;
+    grid-template-columns: 2fr 3fr 0.5fr 1fr 1fr;
+    border-bottom: #333 solid 1px;
+    padding: 1rem 0;
+    text-align: center;
+    font-weight: 500;
+    background: #f7f5f1;
+}
+
+.list-table-format {
+    display: grid;
+    grid-template-columns: 2fr 3fr 0.5fr 1fr 1fr;
+    border-bottom: 1px solid #333;
+    padding: 2rem 0;
+    text-align: center;
+    align-items: center;
+}
+
+.list-table.product-name-img {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.list-table.product-name-img img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.list-table-format .delete-btn {
+    width: fit-content;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    background-color: #1f2937;
+    font-weight: 500;
+    color: #e5e7eb;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.list-table-format .delete-btn:hover {
+    background-color: #374151;
+}

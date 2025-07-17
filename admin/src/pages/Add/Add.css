@@ -1,9 +1,7 @@
 .add {
-    width: 70%;
-    margin: 0 25%;
-    padding: 2rem 0;
+    flex: 1;
+    margin: 2rem 5rem;
     font-size: 1rem;
-    color: #6d6d6d;
 }
 
 .add form {
@@ -11,8 +9,9 @@
 }
 
 .add-image-upload {
-    width: 160px;
+    width: 120px;
 }
+
 
 .add-image-upload img {
     width: 100%;
@@ -25,38 +24,44 @@
     width: max(40%, 280px);
 }
 
-.add p {
-    font-weight: 600;
-    color: #1f2937;
-}
 
 .add-product-name input, .add-product-description textarea {
     padding: 10px;
     border-radius: 10px;
+    border: #374151 1px solid;
     outline: none;
-    border: 1px solid #ccc;
 }
 
 .add-category-price {
     display: flex;
-    gap: 60px;
+    gap: 30px;
 }
 
 .add-category-price select, .add-category-price input {
-    max-width: 120px;
+    max-width: 180px;
     padding: 10px;
+    border-radius: 10px;
+    border: #374151 1px solid;
+    outline: none;
+}
+
+.add-category-price select {
+    background: #4b5563;
+    color: #e5e7eb;
 }
 
 .add-btn {
-    max-width: 120px;
+    width: fit-content;
     border: none;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+    padding: 0.8rem 1rem;
     border-radius: 10px;
+    background-color: #1f2937;
+    font-weight: 500;
+    color: #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .add-btn:hover {
-    background-color: #333;
+    background-color: #374151;
 }
