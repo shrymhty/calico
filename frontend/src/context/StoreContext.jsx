@@ -12,6 +12,11 @@ const StoreContextProvider = (props) => {
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
 
+    // backend url
+    const url = "http://localhost:4000";
+    
+    const [token, setToken] = useState("");
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
@@ -88,7 +93,10 @@ const StoreContextProvider = (props) => {
         getCartTotal,
         user,
         logout,
-        userData
+        userData,
+        url,
+        token,
+        setToken
     };
 
     // get total here

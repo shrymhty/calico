@@ -7,6 +7,8 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndP
 import { auth, db, provider } from '../utils/firebase';
 import {setDoc, doc} from "firebase/firestore"
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { StoreContext } from '../../context/StoreContext';
 
 const LoginPopup = ({setShowLogin}) => {
 
@@ -16,6 +18,8 @@ const LoginPopup = ({setShowLogin}) => {
         email: "",
         password: ""
     });
+
+    const {url, setToken} = useContext(StoreContext);
 
     useEffect(() => {
         // Disable scroll
@@ -50,6 +54,16 @@ const LoginPopup = ({setShowLogin}) => {
                     name: data.name,
                     
                 })
+
+                const response = await user.getIdToken();
+                setToken(response);
+
+                await fetch(`${url}/api/user/init`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${response}`
+                    }
+                });
             }
             console.log("User is registered successfully");
             setShowLogin(false);
@@ -68,7 +82,22 @@ const LoginPopup = ({setShowLogin}) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log("User logged in successfully");
-            setShowLogin(false); // Close popup after login
+
+            const user = auth.currentUser;
+            if (user) {
+                const response = await user.getIdToken();
+                setToken(response);
+
+                setShowLogin(false); // Close popup after login
+
+                await fetch(`${url}/api/user/init`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${response}`
+                    }
+                });
+            }
+            
         } catch (error) {
             console.log(error.message);
             toast.error(error.message, {
@@ -77,20 +106,48 @@ const LoginPopup = ({setShowLogin}) => {
         }
     };
 
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, provider).then(async (result) => {
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
             if (user) {
                 await setDoc(doc(db, "Users", user.uid), {
                     email: user.email,
-                    name: user.displayName, // Note: Use displayName, not name
+                    name: user.displayName,
+                });
+
+                const response = await user.getIdToken();
+                setToken(response);
+
+                console.log(response);
+
+                await fetch(`${url}/api/user/init`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${response}`
+                    }
                 });
                 setShowLogin(false);
             }
-        }).catch((error) => {
+        } catch (error) {
             console.error("Google sign-in error:", error);
-        });
+        }
+
+        // signInWithPopup(auth, provider).then(async (result) => {
+        //     const user = result.user;
+
+        //     if (user) {
+        //         await setDoc(doc(db, "Users", user.uid), {
+        //             email: user.email,
+        //             name: user.displayName, // Note: Use displayName, not name
+        //         });
+        //         setShowLogin(false);
+        //     }
+        // }).catch((error) => {
+        //     console.error("Google sign-in error:", error);
+        // });
     };
 
   return (
@@ -126,7 +183,7 @@ const LoginPopup = ({setShowLogin}) => {
                     <p>OR</p>
                     <div className="line"></div>
                 </div>
-                <button className='google-btn' onClick={() => handleGoogleLogin()}>
+                <button className='google-btn' onClick={(e) => handleGoogleLogin(e)}>
                     <img src={assets.google_icon} alt="" />
                     Continue With Google    
                 </button>
