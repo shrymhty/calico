@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Shop.css'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { category_list, product_list } from '../../assets/assets';
+import { category_list } from '../../assets/assets';
 import ProductCard from '../../components/ProductCard/ProductCard'
+import { StoreContext } from '../../context/StoreContext';
 
 const Shop = () => {
+
+    const {product_list, url} = useContext(StoreContext);
 
     const {category} = useParams();
     const [price, setPrice] = useState(5000);
@@ -97,7 +100,7 @@ const Shop = () => {
                     description={prod.description}
                     category={prod.category}
                     price={prod.price}
-                    image={prod.image}
+                    image={url+"/images/"+prod.image}
                 />
             ))}
         </div>

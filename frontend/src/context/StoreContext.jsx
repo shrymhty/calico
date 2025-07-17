@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { product_list } from "../assets/assets";
+// import { product_list } from "../assets/assets";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../components/utils/firebase";
 import { getDoc, doc } from "firebase/firestore";
+import axios from "axios"
 
 export const StoreContext = createContext();
 
@@ -11,6 +12,7 @@ const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [product_list, setProductList] = useState([]);
 
     // backend url
     const url = "http://localhost:4000";
@@ -36,6 +38,7 @@ const StoreContextProvider = (props) => {
     const logout = () => {
         signOut(auth).then(() => {
             setUser(null);
+            setToken("");
         });
     }
 
@@ -85,6 +88,15 @@ const StoreContextProvider = (props) => {
         return totalAmount;
     }
 
+    const fetchProductList = async () => {
+        const response = await axios.get(`${url}/api/products/list`);
+        setProductList(response.data.data);
+    }
+
+    useEffect(() => {
+        fetchProductList();
+    }, []); 
+
     const contextValue = {
         cartItems,
         addToCart,
@@ -96,7 +108,8 @@ const StoreContextProvider = (props) => {
         userData,
         url,
         token,
-        setToken
+        setToken,
+        product_list
     };
 
     // get total here
