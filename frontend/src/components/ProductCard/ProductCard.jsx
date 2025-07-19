@@ -2,7 +2,7 @@ import React from 'react'
 import './ProductCard.css'
 import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ id, name, description, category, price, image }) => {
+const ProductCard = ({ id, name, price, image }) => {
 
   const navigate = useNavigate();
 

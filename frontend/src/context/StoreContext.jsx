@@ -9,7 +9,7 @@ export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
 
-    const [cartItems, setCartItems] = useState({});
+    const [cartItems, setCartItems] = useState([]);
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
     const [product_list, setProductList] = useState([]);
@@ -27,6 +27,7 @@ const StoreContextProvider = (props) => {
                 if (userDoc.exists()) {
                     setUserData(userDoc.data());
                 }
+                // await fetchCartItems();
             } else {
                 setUser(null);
                 setUserData(null);
@@ -42,56 +43,124 @@ const StoreContextProvider = (props) => {
         });
     }
 
-    const addToCart = (itemId) => {
-        if (!cartItems[itemId]) {
-            setCartItems((prev) => ({
-                ...prev,
-                [itemId]: 1
-            }));
-        } else {
-            setCartItems((prev) => ({
-                ...prev,
-                [itemId]: prev[itemId]+1
-            }))
+    const addToCart = async (itemId) => {
+        const product = product_list.find(p => p._id === itemId);
+        if (!product) {
+            console.error("Product not found for ID:", itemId);
+            return;
         }
-    }
+
+        // ✅ If user is logged in → call API
+        if (user) {
+            try {
+                const token = await auth.currentUser.getIdToken();
+
+                await fetch(`${url}/api/cart/add`, {
+                    method: "POST",
+                    headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                    productId: itemId,
+                    price: product.price
+                    })
+                });
+
+                await fetchCartItems();
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
+            } else {
+            // ✅ Else, update locally
+                setCartItems(prev => {
+                    const existingItem = prev.find(item => item.productId === itemId);
+                    if (existingItem) {
+                        return prev.map(item =>
+                        item.productId === itemId
+                            ? { ...item, quantity: item.quantity + 1 }
+                            : item
+                        );
+                    } else {
+                        return [...prev, { productId: itemId, quantity: 1, price: product.price }];
+                    }
+                });
+            }
+        };
+
 
     const removeFromCart = async (itemId) => {
-        setCartItems((prev) => {
-            if (!prev[itemId]) return prev;
-            const updated = { ...prev };
-            if (updated[itemId] <= 1) {
-                delete updated[itemId];
-            } else {
-                updated[itemId] -= 1;
-            }
-            return updated;
-        });
-    }
-    
-    const deleteFromCart = (itemId) => {
-        setCartItems(prev => {
-            const updatedCart = { ...prev };
-            delete updatedCart[itemId];
-            return updatedCart;
-        });
-    }
+        if (user) {
+            try {
+                const token = await auth.currentUser.getIdToken();
 
-    const getCartTotal = () => {
-        let totalAmount = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                let itemInfo = product_list.find((product) => product.id === parseInt(item));
-                totalAmount += itemInfo.price * cartItems[item]
-            }
+                await fetch(`${url}/api/cart/remove`, {
+                    method: "POST",
+                    headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                    productId: itemId
+                    })
+                });
+
+                await fetchCartItems();
+                } catch (error) {
+                console.error("Error removing from cart:", error);
+                }
+        } else {
+            // Update locally
+            setCartItems(prev => {
+                const existingItem = prev.find(item => item.productId === itemId);
+                if (!existingItem) return prev;
+
+                if (existingItem.quantity === 1) {
+                    // Remove the item
+                    return prev.filter(item => item.productId !== itemId);
+                } else {
+                    // Decrement quantity
+                    return prev.map(item =>
+                    item.productId === itemId
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item
+                    );
+                }
+            });
         }
-        return totalAmount;
+    };
+    
+    const getCartTotal = () => {
+        return cartItems.reduce((total, item) => {
+            return total + (item.quantity * item.price)
+        }, 0);
     }
 
     const fetchProductList = async () => {
         const response = await axios.get(`${url}/api/products/list`);
         setProductList(response.data.data);
     }
+
+    const fetchCartItems = async () => {
+        if (auth.currentUser) {
+            const token = await auth.currentUser.getIdToken();
+            try {
+                const res = await fetch(`${url}/api/cart/items`, {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setCartItems(data.cartItems); // full array of productId, quantity, price
+                }
+            } catch (error) {
+                console.log("Error fetching cart items:", error);
+            }
+        }
+    };
 
     useEffect(() => {
         fetchProductList();
@@ -101,7 +170,6 @@ const StoreContextProvider = (props) => {
         cartItems,
         addToCart,
         removeFromCart,
-        deleteFromCart,
         getCartTotal,
         user,
         logout,
@@ -109,12 +177,9 @@ const StoreContextProvider = (props) => {
         url,
         token,
         setToken,
-        product_list
+        product_list,
+        fetchCartItems
     };
-
-    // get total here
-
-    // get all items list
 
     return (
         <StoreContext.Provider value={contextValue}>

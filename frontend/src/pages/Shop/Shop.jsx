@@ -11,7 +11,7 @@ const Shop = () => {
     const {product_list, url} = useContext(StoreContext);
 
     const {category} = useParams();
-    const [price, setPrice] = useState(5000);
+    const [price, setPrice] = useState(10000);
     const [selectedCat, setSelectedCat] = useState([]);
 
     const handleCategoryChange = (e) => {
@@ -64,7 +64,7 @@ const Shop = () => {
                 <input 
                     type="range"
                     min="0"
-                    max="5000"
+                    max="10000"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     className='price-range' 
@@ -94,8 +94,8 @@ const Shop = () => {
         <div className="products-div">
             {filteredProducts.map((prod) => (
                 <ProductCard
-                    key={prod.id}
-                    id={prod.id}
+                    key={prod._id}
+                    id={prod._id}
                     name={prod.name}
                     description={prod.description}
                     category={prod.category}
